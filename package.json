@@ -1,0 +1,31 @@
+{
+  "name": "passport-onshape",
+  "version": "1.0.0",
+  "description": "Onshape OAuth 2.0 authentication strategy for Passport.",
+  "main": "./lib",
+  "scripts": {
+      "test": "istanbul cover --include-all-sources --report html jasmine-node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/onshape/passport-onshape.git"
+  },
+  "keywords": [
+    "passport",
+    "oauth2",
+    "authentication",
+    "onshape"
+  ],
+  "author": "awk@onshape.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onshape/passport-onshape/issues"
+  },
+  "homepage": "https://github.com/onshape/passport-onshape#readme",
+  "dependencies": {
+    "istanbul": "^0.3.15",
+    "jasmine-node": "^1.14.5",
+    "passport-oauth2": "^1.1.2"
+  },
+  "devDependencies": {}
+}
