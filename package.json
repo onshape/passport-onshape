@@ -1,6 +1,6 @@
 {
   "name": "passport-onshape",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Onshape OAuth 2.0 authentication strategy for Passport.",
   "main": "./lib",
   "scripts": {
