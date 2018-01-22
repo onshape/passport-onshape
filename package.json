@@ -4,7 +4,7 @@
   "description": "Onshape OAuth 2.0 authentication strategy for Passport.",
   "main": "./lib",
   "scripts": {
-      "test": "istanbul cover --include-all-sources --report html jasmine-node test"
+    "test": "istanbul cover --include-all-sources --report html jasmine-node test"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
   "dependencies": {
     "istanbul": "^0.3.15",
     "jasmine-node": "^1.14.5",
-    "passport-oauth2": "^1.1.2"
+    "passport-oauth2": "^1.1.2",
+    "utils-merge": "^1.0.1"
   },
   "devDependencies": {}
 }
