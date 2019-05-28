@@ -24,7 +24,7 @@
   "homepage": "https://github.com/onshape/passport-onshape#readme",
   "dependencies": {
     "istanbul": "^0.4.5",
-    "jasmine-node": "^2.0.1",
+    "jasmine-node": "^3.0.0",
     "passport-oauth2": "^1.1.2",
     "utils-merge": "^1.0.1"
   },

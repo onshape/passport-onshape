@@ -18,7 +18,7 @@ describe('Strategy Tests', function () {
 
   it('should fetch the user profile', function() {
     var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').and.callFake(function(url, token, cb) {
+    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
       var response = {id: 'AUserId', name: 'User Name',html_url: 'http://example.com', email: 'user@example.com'};
       cb(null, JSON.stringify(response));
     });
@@ -37,23 +37,24 @@ describe('Strategy Tests', function () {
 
   it('should handle an error when fetching the user profile', function() {
     var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').and.callFake(function(url, token, cb) {
+    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
       cb('An Error occured', null);
     });
     onshapeStrategy.userProfile('AnAccessToken', done);
     expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(jasmine.any(String), 'AnAccessToken', jasmine.any(Function));
-    expect(done.calls.mostRecent().args[0].message).toEqual( 'Failed to fetch user profile' );
-    expect(done.calls.mostRecent().args[0].name).toEqual( 'InternalOAuthError' );
-    expect(done.calls.mostRecent().args[0].oauthError).toEqual( 'An Error occured' );
+    var recentCallArgs = done.mostRecentCall.args[0];
+    expect(recentCallArgs.message).toEqual( 'Failed to fetch user profile' );
+    expect(recentCallArgs.name).toEqual( 'InternalOAuthError' );
+    expect(recentCallArgs.oauthError).toEqual( 'An Error occured' );
   });
 
   it('should handle an error when deserializing the user profile', function() {
     var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').and.callFake(function(url, token, cb) {
+    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
       cb(null, 'A Text String');
     });
     onshapeStrategy.userProfile('AnAccessToken', done);
     expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(jasmine.any(String), 'AnAccessToken', jasmine.any(Function));
-    expect(done.calls.mostRecent().args[0].message).toEqual('Failed to parse user profile');
+    expect(done.mostRecentCall.args[0].message).toEqual('Failed to parse user profile');
   });
 });
