@@ -17,44 +17,41 @@ describe('Strategy Tests', function () {
   });
 
   it('should fetch the user profile', function() {
-    var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
+    var done = jest.fn();
+    jest.spyOn(onshapeStrategy._oauth2, 'get').mockImplementation(function(url, token, cb) {
       var response = {id: 'AUserId', name: 'User Name',html_url: 'http://example.com', email: 'user@example.com'};
       cb(null, JSON.stringify(response));
     });
     onshapeStrategy.userProfile('AnAccessToken', done);
-    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(jasmine.any(String), 'AnAccessToken', jasmine.any(Function));
+    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(expect.any(String), 'AnAccessToken', expect.any(Function));
     expect(done).toHaveBeenCalledWith(null, {
       provider: 'onshape',
       id: 'AUserId',
       displayName: 'User Name',
       profileUrl: 'http://example.com',
       emails: [{value: 'user@example.com'}],
-      _raw: jasmine.any(String),
-      _json: jasmine.any(Object)
+      _raw: expect.any(String),
+      _json: expect.any(Object)
     });
   });
 
   it('should handle an error when fetching the user profile', function() {
-    var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
+    var done = jest.fn();
+    jest.spyOn(onshapeStrategy._oauth2, 'get').mockImplementation(function(url, token, cb) {
       cb('An Error occured', null);
     });
     onshapeStrategy.userProfile('AnAccessToken', done);
-    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(jasmine.any(String), 'AnAccessToken', jasmine.any(Function));
-    var recentCallArgs = done.mostRecentCall.args[0];
-    expect(recentCallArgs.message).toEqual( 'Failed to fetch user profile' );
-    expect(recentCallArgs.name).toEqual( 'InternalOAuthError' );
-    expect(recentCallArgs.oauthError).toEqual( 'An Error occured' );
+    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(expect.any(String), 'AnAccessToken', expect.any(Function));
+    expect(done).toHaveBeenLastCalledWith( {message: 'Failed to fetch user profile', name: 'InternalOAuthError', oauthError: 'An Error occured'} );
   });
 
   it('should handle an error when deserializing the user profile', function() {
-    var done = jasmine.createSpy('done');
-    spyOn(onshapeStrategy._oauth2, 'get').andCallFake(function(url, token, cb) {
+    var done = jest.fn();
+    jest.spyOn(onshapeStrategy._oauth2, 'get').mockImplementation(function(url, token, cb) {
       cb(null, 'A Text String');
     });
     onshapeStrategy.userProfile('AnAccessToken', done);
-    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(jasmine.any(String), 'AnAccessToken', jasmine.any(Function));
-    expect(done.mostRecentCall.args[0].message).toEqual('Failed to parse user profile');
+    expect(onshapeStrategy._oauth2.get).toHaveBeenCalledWith(expect.any(String), 'AnAccessToken', expect.any(Function));
+    expect(done).toHaveBeenLastCalledWith(expect.objectContaining({message: 'Failed to parse user profile'}));
   });
 });
