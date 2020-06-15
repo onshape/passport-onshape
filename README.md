@@ -26,8 +26,8 @@ are specified as options.  The strategy requires a `verify` callback,
 which receives an access token and profile, and calls `done` providing a user.
 
     passport.use(new OAuth2Strategy({
-        authorizationURL: 'https://cad.onshape.com/oauth/authorize',
-        tokenURL: 'https://cad.onshape.com/oauth/token',
+        authorizationURL: 'https://oauth.onshape.com/oauth/authorize',
+        tokenURL: 'https://oauth.onshape.com/oauth/token',
         clientID: EXAMPLE_CLIENT_ID,
         clientSecret: EXAMPLE_CLIENT_SECRET,
         callbackURL: "http://localhost:3000/auth/example/callback"
