@@ -16,6 +16,6 @@ jobs:
       - uses: actions/setup-node@v3.5.1
         with:
           node-version: 16
-      - run: npm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: onshape/actions-npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
