@@ -67,6 +67,14 @@ application:
     $ npm install
     $ npm test
 
+## Publishing for Onshape Developers
+
+    $ set +o history
+    $ export NPM_TOKEN={ONSHAPE_TOKEN}
+    $ set -o history
+    $ npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+    $ npm publish
+
 ## License
 
 [The MIT License](http://opensource.org/licenses/MIT)
