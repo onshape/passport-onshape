@@ -1,4 +1,4 @@
-# passport-oauth2
+# passport-onshape
 
 [![Build](https://travis-ci.org/onshape/passport-onshape.svg?branch=master)](https://travis-ci.org/onshape/passport-onshape)
 
@@ -21,17 +21,21 @@ unobtrusively integrated into any application or framework that supports
 #### Configure Strategy
 
 The Onshape authentication strategy authenticates users using a third-party
-account and OAuth 2.0 tokens.  The provider's client identifer and secret,
-are specified as options.  The strategy requires a `verify` callback,
+account and OAuth 2.0 tokens.
+
+- The Onshape OAuth application client identifer and secret
+are specified as options.
+- The authentication strategy requires a `verify` callback,
 which receives an access token and profile, and calls `done` providing a user.
 
-    passport.use(new OAuth2Strategy({
-        authorizationURL: 'https://oauth.onshape.com/oauth/authorize',
-        tokenURL: 'https://oauth.onshape.com/oauth/token',
-        clientID: EXAMPLE_CLIENT_ID,
-        clientSecret: EXAMPLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/example/callback"
-      },
+    passport.use(new OnshapeStrategy({
+      clientID: oauth_clientid, //the client ID string that you got when registering the app with Onshape
+      clientSecret: oauth_clent_secret, //The secret string
+      callbackURL: oauth_callback, //The Oauth Callback URL ex: /oauthRedirect
+      authorizationURL: oauthurl, //https://oauth.onshape.com/oauth/authorize
+      tokenURL: oauthtokenurl, //https://oauth.onshape.com/oauth/token
+      userProfileURL: userprofileurl //https://cad.onshape.com/api/users/sessioninfo
+    },
       function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ exampleId: profile.id }, function (err, user) {
           return done(err, user);
@@ -43,6 +47,14 @@ which receives an access token and profile, and calls `done` providing a user.
 
 Use `passport.authenticate()`, specifying the `'oauth2'` strategy, to
 authenticate requests.
+
+Authentication options include:
+- `failureRedirect` - string; A  redirect destination if the grant is denied or revoked
+- `failureMessage` - boolean; Whether or not to add an informative message to the session
+about why authentication failed which can then be displayed to the user
+- `passReqToCallback` - boolean; Whether or not to pass the request object to the
+`verify` callback as the first parameter. This can be useful for accessing params
+passed through the Oauth flow, such as `state`
 
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
