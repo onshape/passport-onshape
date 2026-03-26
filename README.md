@@ -1,8 +1,5 @@
 # passport-oauth2
 
-[![Build](https://travis-ci.org/onshape/passport-onshape.svg?branch=master)](https://travis-ci.org/onshape/passport-onshape)
-
-
 Onshape authentication strategy for [Passport](http://passportjs.org/).
 
 This module lets you authenticate with Onshape using OAuth 2.0 in your
@@ -21,7 +18,7 @@ unobtrusively integrated into any application or framework that supports
 #### Configure Strategy
 
 The Onshape authentication strategy authenticates users using a third-party
-account and OAuth 2.0 tokens.  The provider's client identifer and secret,
+account and OAuth 2.0 tokens.  The provider's client identifier and secret,
 are specified as options.  The strategy requires a `verify` callback,
 which receives an access token and profile, and calls `done` providing a user.
 
