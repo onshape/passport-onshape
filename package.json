@@ -23,8 +23,7 @@
   },
   "homepage": "https://github.com/onshape/passport-onshape#readme",
   "dependencies": {
-    "passport-oauth2": "^1.6.1",
-    "utils-merge": "^1.0.1"
+    "passport-oauth2": "^1.6.1"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "4.1.1",
